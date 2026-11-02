@@ -1,0 +1,13 @@
+build*/
+dist/
+*.exe
+*.obj
+*.o
+*.res
+*.pdb
+*.log
+.vs/
+*.user
+*.suo
+.idea/
+.vscode/
