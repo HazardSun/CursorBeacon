@@ -69,6 +69,7 @@ add_executable(cursorbeacon_tests
     tests/test_scale_controller.cpp
     tests/test_state_machine.cpp
     tests/test_fullscreen_rules.cpp
+    tests/test_time.cpp
     resources/app.rc)
 target_include_directories(cursorbeacon_tests PRIVATE src third_party resources)
 target_link_libraries(cursorbeacon_tests PRIVATE cursorbeacon_core)

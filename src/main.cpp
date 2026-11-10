@@ -29,7 +29,7 @@ using namespace cb;
 
 namespace {
 
-constexpr const char* kVersion = "0.1.0";
+constexpr const char* kVersion = "0.1.1";
 
 std::atomic<bool> g_stop{false};
 

@@ -13,7 +13,7 @@ int64_t now_us() {
 
     LARGE_INTEGER counter{};
     QueryPerformanceCounter(&counter);
-    return counter.QuadPart * 1'000'000 / frequency.QuadPart;
+    return qpc_to_us(counter.QuadPart, frequency.QuadPart);
 }
 
 }  // namespace cb
