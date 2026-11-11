@@ -8,7 +8,7 @@
 ![C%2B%2B](https://img.shields.io/badge/C%2B%2B-20-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-> **当前版本：0.1.0 预览版。** 核心服务已可用并通过测试；托盘图标、设置界面和开机自启在后续里程碑中。
+> **当前版本：0.1.1 预览版。** 核心服务已可用并通过测试；托盘图标、设置界面和开机自启在后续里程碑中。
 
 ---
 
@@ -68,7 +68,7 @@ stateDiagram-v2
 
 ## 安装
 
-1. 从 [最新版本](../../releases/latest) 下载 `CursorBeacon-0.1.0-win64.zip`。
+1. 从 [最新版本](../../releases/latest) 下载 `CursorBeacon-0.1.1-win64.zip`。
 2. 解压到任意目录，例如 `%LOCALAPPDATA%\Programs\CursorBeacon`。
 3. 运行：
 
@@ -313,16 +313,16 @@ PLAN.md        调研、设计与实施计划
 
 ## 发行包校验
 
-`CursorBeacon-0.1.0-win64.zip`：
+`CursorBeacon-0.1.1-win64.zip`：
 
 ```text
-SHA256  0BE3E2007DC15042B02D607A1D164E7F668ADA759E3BB8F7AA944B1CEC18C306
+SHA256  E2C1ADCCCC6112D127BD08F1421B6FB0512354E1E4C913325366DB6E09076301
 ```
 
 `CursorBeacon.exe`：
 
 ```text
-SHA256  C40E25FCEE6C802E20C46353F9ABAB00E9106201994F0B38EE93A1EF69FB8723
+SHA256  0D32BFBA508FBD8381596AA96915CA23628FD25FC524BDFBBF8121DCE48FD404
 ```
 
 变更记录见 [CHANGELOG.md](CHANGELOG.md)。

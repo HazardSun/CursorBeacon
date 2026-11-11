@@ -8,7 +8,7 @@
 ![C%2B%2B](https://img.shields.io/badge/C%2B%2B-20-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-> **Status: 0.1.0 preview.** The core service is working and tested. Tray icon, settings UI and auto-start are planned for the next milestone.
+> **Status: 0.1.1 preview.** The core service is working and tested. Tray icon, settings UI and auto-start are planned for the next milestone.
 
 ---
 
@@ -68,7 +68,7 @@ The last three filters are what keep ordinary navigation (moving across the scre
 
 ## Install
 
-1. Download `CursorBeacon-0.1.0-win64.zip` from the [latest release](../../releases/latest).
+1. Download `CursorBeacon-0.1.1-win64.zip` from the [latest release](../../releases/latest).
 2. Extract it anywhere, e.g. `%LOCALAPPDATA%\Programs\CursorBeacon`.
 3. Run:
 
@@ -308,16 +308,16 @@ PLAN.md        design, research and implementation plan
 
 ## Release verification
 
-`CursorBeacon-0.1.0-win64.zip`:
+`CursorBeacon-0.1.1-win64.zip`:
 
 ```text
-SHA256  0BE3E2007DC15042B02D607A1D164E7F668ADA759E3BB8F7AA944B1CEC18C306
+SHA256  E2C1ADCCCC6112D127BD08F1421B6FB0512354E1E4C913325366DB6E09076301
 ```
 
 `CursorBeacon.exe`:
 
 ```text
-SHA256  C40E25FCEE6C802E20C46353F9ABAB00E9106201994F0B38EE93A1EF69FB8723
+SHA256  0D32BFBA508FBD8381596AA96915CA23628FD25FC524BDFBBF8121DCE48FD404
 ```
 
 See [CHANGELOG.md](CHANGELOG.md) for details.

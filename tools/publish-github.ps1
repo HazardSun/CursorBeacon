@@ -1,6 +1,6 @@
 param(
     [string]$RepoName = "CursorBeacon",
-    [string]$Tag = "v0.1.0",
+    [string]$Tag = "v0.1.1",
     [switch]$Private
 )
 
@@ -58,7 +58,7 @@ if (-not (Test-Path ".git")) {
 git add -A
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
-    git commit -m "CursorBeacon 0.1.0" | Out-Null
+    git commit -m "CursorBeacon 0.1.1" | Out-Null
 }
 git branch -M main
 
@@ -85,7 +85,7 @@ foreach ($topic in $topics) {
 }
 & gh repo edit $repoFull --description $description @topicArgs
 
-$zip = Join-Path $root "dist/CursorBeacon-0.1.0-win64.zip"
+$zip = Join-Path $root "dist/CursorBeacon-0.1.1-win64.zip"
 $sum = "$zip.sha256"
 if (-not (Test-Path $zip)) {
     Write-Error "Release asset not found: $zip"
@@ -101,7 +101,7 @@ if ($releaseExists) {
 } else {
     gh release create $Tag $zip $sum `
         --repo $repoFull `
-        --title "CursorBeacon 0.1.0 — Windows shake-to-find cursor" `
+        --title "CursorBeacon 0.1.1 - Windows shake-to-find cursor" `
         --notes-file (Join-Path $root "RELEASE_NOTES.md")
 }
 

@@ -1,6 +1,14 @@
-# CursorBeacon 0.1.0 — Windows shake-to-find cursor
+# CursorBeacon 0.1.1 - Windows shake-to-find cursor
 
 CursorBeacon makes the real Windows pointer grow when you shake the mouse, then shrink back automatically. It is built for 4K/8K and multi-monitor desktops, with per-monitor DPI and fullscreen suppression.
+
+## Fixed in 0.1.1
+
+- **Long-uptime failure:** an internal timestamp overflow after ~10.6 days of uptime could silently stop detection. Timestamps are now overflow-safe; an 11-day regression test was added.
+- **Split-screen resize cursors:** the default now enlarges all 14 system cursor shapes, including `SizeWE`/`SizeNS`, so split-screen borders grow too.
+- **Stuck enlarged cursor:** if rendering failed, the previous enlarged cursor could remain. The service now restores it before disabling effects.
+- **Restore could hang:** `SPI_SETCURSORS` no longer broadcasts a synchronous setting-change message to every top-level window.
+- **Input recovery:** Raw Input is re-registered every 5 seconds, and a timer failure falls back to polling, so lock/unlock, desktop switches and device changes do not disable shaking.
 
 ## Highlights
 
@@ -16,14 +24,14 @@ CursorBeacon makes the real Windows pointer grow when you shake the mouse, then 
 
 ## Download
 
-- `CursorBeacon-0.1.0-win64.zip`
-- `CursorBeacon-0.1.0-win64.zip.sha256`
+- `CursorBeacon-0.1.1-win64.zip`
+- `CursorBeacon-0.1.1-win64.zip.sha256`
 
 SHA-256:
 
 ```text
-0BE3E2007DC15042B02D607A1D164E7F668ADA759E3BB8F7AA944B1CEC18C306  CursorBeacon-0.1.0-win64.zip
-C40E25FCEE6C802E20C46353F9ABAB00E9106201994F0B38EE93A1EF69FB8723  CursorBeacon.exe
+E2C1ADCCCC6112D127BD08F1421B6FB0512354E1E4C913325366DB6E09076301  CursorBeacon-0.1.1-win64.zip
+0D32BFBA508FBD8381596AA96915CA23628FD25FC524BDFBBF8121DCE48FD404  CursorBeacon.exe
 ```
 
 ## Install
@@ -56,6 +64,7 @@ If the cursor is ever stuck large:
 - This is a preview release: no tray icon, settings UI or auto-start yet.
 - Fullscreen detection is foreground-window based; background/z-order scanning is planned.
 - Apps that draw their own cursor are not affected.
+- Slow (~2 Hz) natural shakes can be rejected by the net-displacement filter; a 3-5 Hz shake with 300+ px travel is the reliable gesture.
 
 ## Feedback
 
