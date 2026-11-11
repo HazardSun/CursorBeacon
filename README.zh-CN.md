@@ -156,7 +156,7 @@ grow_tau_ms=60
 shrink_tau_ms=180
 update_hz=30
 sampling_mode=auto
-cursor_set=Arrow,IBeam,Hand,Crosshair
+cursor_set=all
 pause_on_fullscreen=true
 pause_on_click=true
 ```
@@ -170,7 +170,7 @@ pause_on_click=true
 | `shrink_tau_ms` | `180` | 缩小平滑时间常数 |
 | `update_hz` | `30` | 光标帧最大更新频率 |
 | `sampling_mode` | `auto` | 保留字段；自动选择 Raw Input/轮询 |
-| `cursor_set` | `Arrow,IBeam,Hand,Crosshair` | 放大的光标类型；`all` 表示全部 |
+| `cursor_set` | `all` | 放大的光标类型；`all` 覆盖分屏/窗口边缘的调整光标 |
 | `pause_on_fullscreen` | `true` | 全屏屏禁用 |
 | `pause_on_click` | `true` | 按下鼠标键立即恢复 |
 

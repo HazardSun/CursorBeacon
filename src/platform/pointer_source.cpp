@@ -85,6 +85,10 @@ bool PointerSource::start() {
         return true;
     }
 
+    if (thread_.joinable()) {
+        thread_.join();
+    }
+
     stopping_ = false;
     poll_stop_ = false;
 
@@ -127,7 +131,6 @@ PointerSource::Mode PointerSource::mode() const {
 
 bool PointerSource::initialize() {
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
-
     const HINSTANCE instance = GetModuleHandleW(nullptr);
     WNDCLASSEXW window_class{};
     window_class.cbSize = sizeof(window_class);
@@ -155,13 +158,48 @@ bool PointerSource::initialize() {
     raw_available_ =
         RegisterRawInputDevices(&device, 1, sizeof(device)) != FALSE;
 
-    SetTimer(hwnd, kWatchdogTimer, 100, nullptr);
+    if (SetTimer(hwnd, kWatchdogTimer, 100, nullptr) == 0) {
+        raw_available_ = false;
+    }
+    SetTimer(hwnd, kHealthTimer, 5'000, nullptr);
 
     if (!raw_available_.load()) {
         ensure_polling(std::numeric_limits<std::int64_t>::max() / 4);
     }
 
     return true;
+}
+
+void PointerSource::refresh_raw_input() {
+    const HWND hwnd = hwnd_.load();
+    if (hwnd == nullptr) {
+        return;
+    }
+
+    RAWINPUTDEVICE device{};
+    device.usUsagePage = 0x01;
+    device.usUsage = 0x02;
+    device.dwFlags = RIDEV_INPUTSINK;
+    device.hwndTarget = hwnd;
+
+    const bool ok = RegisterRawInputDevices(&device, 1, sizeof(device)) != FALSE;
+    raw_available_ = ok;
+
+    if (!ok) {
+        ensure_polling(std::numeric_limits<std::int64_t>::max() / 4);
+        return;
+    }
+
+    if (SetTimer(hwnd, kWatchdogTimer, 100, nullptr) == 0) {
+        raw_available_ = false;
+        ensure_polling(std::numeric_limits<std::int64_t>::max() / 4);
+        return;
+    }
+
+    // If raw events are flowing again, let an infinite polling fallback exit.
+    if (now_us() - last_raw_event_us_.load() < 1'000'000) {
+        polling_until_us_ = 0;
+    }
 }
 
 void PointerSource::message_loop() {
@@ -210,6 +248,8 @@ LRESULT PointerSource::handle_message(HWND hwnd, UINT message, WPARAM wparam,
         case WM_TIMER:
             if (wparam == kWatchdogTimer) {
                 handle_watchdog();
+            } else if (wparam == kHealthTimer) {
+                refresh_raw_input();
             }
             return 0;
         case kStopMessage:

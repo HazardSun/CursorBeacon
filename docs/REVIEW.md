@@ -1,5 +1,7 @@
 # CursorBeacon 代码审查与安全检查
 
+> 第二轮全量复查（2026-11-11，含 QPC 溢出、分屏光标形状、SPI 阻塞、Raw Input 健康重注册）见 [REVIEW-2026-11-11.md](REVIEW-2026-11-11.md)。
+
 日期：2026-11-02
 版本：0.1.0
 范围：`src/`、`tests/`、`CMakeLists.txt`、`resources/app.manifest`、`tools/` 脚本

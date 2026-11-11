@@ -99,7 +99,10 @@ bool CursorEffector::restore() {
 }
 
 bool CursorEffector::restore_system_cursors() {
-    return SystemParametersInfoW(SPI_SETCURSORS, 0, nullptr, SPIF_SENDCHANGE) != FALSE;
+    // Do not pass SPIF_SENDCHANGE here: it broadcasts WM_SETTINGCHANGE
+    // synchronously and can block the controller forever if any top-level
+    // window is hung. SPI_SETCURSORS reloads the scheme without the broadcast.
+    return SystemParametersInfoW(SPI_SETCURSORS, 0, nullptr, 0) != FALSE;
 }
 
 std::wstring CursorEffector::dirty_flag_path() {

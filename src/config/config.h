@@ -17,7 +17,7 @@ struct Config {
     double shrink_tau_ms{180.0};
     double update_hz{30.0};
     std::string sampling_mode{"auto"};  // auto / rawinput / polling
-    std::vector<std::wstring> cursor_set{L"Arrow", L"IBeam", L"Hand", L"Crosshair"};
+    std::vector<std::wstring> cursor_set{L"all"};
     bool pause_on_fullscreen{true};
     bool pause_on_click{true};
     bool verbose{false};

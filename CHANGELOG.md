@@ -2,6 +2,23 @@
 
 All notable changes to CursorBeacon are documented here.
 
+## 0.1.1 — 2026-11-11 (unreleased)
+
+### Fixed
+
+- **QPC timestamp overflow after ~10.6 days of system uptime**: `now_us()` used `counter * 1'000'000` in 64-bit arithmetic; at 10 MHz QPC this overflowed and made every timestamp negative, silently stopping detection. Replaced with overflow-safe integer decomposition and added an 11-day regression test.
+- **Split-screen resize cursors were not enlarged**: the default `cursor_set` only covered Arrow/IBeam/Hand/Crosshair. Split-screen borders use `SizeWE`/`SizeNS`, so detection fired but the visible cursor stayed normal. The default is now `all`.
+- **`SPI_SETCURSORS` with `SPIF_SENDCHANGE` could block forever** if any top-level window was hung (synchronous broadcast). Restore now uses flags `0`.
+- **Renderer failure could leave an enlarged cursor stuck**: empty frames now restore before disabling effects.
+- **Raw Input could stop after lock/desktop/device changes**: added a 5-second health re-registration and a `SetTimer` failure fallback to polling.
+- **`decay()` initialization sentinel** was wrong for a first sample at timestamp 0.
+- **`PointerSource::start()`** now joins a finished thread before assigning a new one.
+
+### Notes
+
+- The fixed binary is not deployed on the development machine because Device Guard blocks the new hash; the installed 0.1.0 still requires a reboot after ~10.6 days of uptime until the hash is allowlisted or signed.
+- clang-tidy and the standalone test binary are blocked by the same policy on that machine; the source builds cleanly and Clang Static Analyzer reports no findings.
+
 ## 0.1.0 — 2026-11-02
 
 ### Added

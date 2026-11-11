@@ -206,8 +206,11 @@ int run_controller(const Config& config, bool apply_effects,
             const auto frames = renderer.render(selected, last_sample.dpi, decision.scale);
             if (frames.empty()) {
                 if (!logged_effect_error) {
-                    log_error("cursor renderer produced no frames; disabling effects");
+                    log_error("cursor renderer produced no frames; restoring and disabling effects");
                     logged_effect_error = true;
+                }
+                if (effector.applied()) {
+                    effector.restore();
                 }
                 effects_enabled = false;
             } else if (!effector.apply(frames, decision.scale)) {

@@ -64,6 +64,7 @@ private:
 
     bool initialize();
     void message_loop();
+    void refresh_raw_input();
     void handle_raw_input(LPARAM lparam);
     void handle_watchdog();
     void sample_once(bool polled);
@@ -97,6 +98,7 @@ private:
     std::mutex poll_mutex_;
 
     static constexpr UINT_PTR kWatchdogTimer = 1;
+    static constexpr UINT_PTR kHealthTimer = 2;
     static constexpr UINT kStopMessage = WM_APP + 1;
 };
 

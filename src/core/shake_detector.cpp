@@ -75,7 +75,7 @@ void ShakeDetector::reset() {
 }
 
 void ShakeDetector::decay(int64_t now_us) {
-    if (last_processed_us_ == 0 || now_us <= last_processed_us_) {
+    if (!has_last_sample_ || now_us <= last_processed_us_) {
         return;
     }
 

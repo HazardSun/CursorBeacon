@@ -156,7 +156,7 @@ grow_tau_ms=60
 shrink_tau_ms=180
 update_hz=30
 sampling_mode=auto
-cursor_set=Arrow,IBeam,Hand,Crosshair
+cursor_set=all
 pause_on_fullscreen=true
 pause_on_click=true
 ```
@@ -170,7 +170,7 @@ pause_on_click=true
 | `shrink_tau_ms` | `180` | Shrink easing time constant |
 | `update_hz` | `30` | Maximum cursor frame update rate |
 | `sampling_mode` | `auto` | Reserved; auto selects Raw Input with polling fallback |
-| `cursor_set` | `Arrow,IBeam,Hand,Crosshair` | Cursor shapes to enlarge; use `all` for all standard cursors |
+| `cursor_set` | `all` | Cursor shapes to enlarge; `all` covers resize/split-screen cursors too |
 | `pause_on_fullscreen` | `true` | Disable on fullscreen monitors |
 | `pause_on_click` | `true` | Restore when a mouse button is pressed |
 
